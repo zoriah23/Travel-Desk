@@ -47,10 +47,8 @@ type UserPayload = typeof UserPayload.tsType;
 
 const Activity = Record({
   activityId: text,
-  //userId: text,
   activityName: text,
-  timestamp: nat64,
-  price: text,
+  price: nat,
   location: text,
   duration: text,
   participants: Vec(text),
@@ -60,9 +58,8 @@ const Activity = Record({
 type Activity = typeof Activity.tsType;
 
 const ActivityPayload = Record({
-  //  userId: text,
   activityName: text,
-  price: text,
+  price: nat,
   location: text,
   duration: text,
 });
@@ -130,7 +127,7 @@ const BookActivity = Record({
   userName: text,
   userPhoneNumber: text,
   date: text,
-  NumberOfPeople: nat,
+  numberOfPeople: nat,
 });
 
 type BookActivity = typeof BookActivity.tsType;
@@ -140,7 +137,7 @@ const BookActivityPayload = Record({
   userName: text,
   userPhoneNumber: text,
   date: text,
-  NumberOfPeople: nat,
+  numberOfPeople: nat,
 });
 
 type BookActivityPayload = typeof BookActivityPayload.tsType;
@@ -163,7 +160,7 @@ const BookHotel = Record({
   hotelId: text,
   userName: text,
 
-  NumberOfRooms: nat,
+  numberOfRooms: nat,
   duration: nat,
   typeOfRoom: text,
 });
@@ -174,7 +171,7 @@ const BookHotelPayload = Record({
   hotelId: text,
   userName: text,
 
-  NumberOfRooms: nat,
+  numberOfRooms: nat,
   duration: nat,
   typeOfRoom: text,
 });
@@ -189,51 +186,7 @@ const FlightClass = Variant({
 
 type FlightClass = typeof FlightClass.tsType;
 
-// const BookFlight = Record({
-//   flightId: text,
 
-//   userName: text,
-//   NumberOfSeats: nat,
-//   class: text,
-// });
-
-// type BookFlight = typeof BookFlight.tsType;
-
-// const BookFlightPayload = Record({
-//   flightId: text,
-//   userName: text,
-//   NumberOfSeats: nat,
-//   class: text,
-// });
-
-// type BookFlightPayload = typeof BookFlightPayload.tsType;
-
-// const Services = Variant({
-//   Activity: BookActivity,
-//   Hotels: BookHotel,
-//   Flight: BookFlight,
-// });
-
-// type Services = typeof Services.tsType;
-
-// const Booking = Record({
-//   bookingId: text,
-//   serviceBooked: Services,
-// });
-
-// type Booking = typeof Booking.tsType;
-
-//  const BookingPayload = Record({
-//    serviceBooked: Services,
-
-//  });
-
-//  type BookingPayload = typeof BookingPayload.tsType;
-
-// const UpdateBookingPayload = Record({
-//   bookingId: text,
-//   status: text,
-// });
 
 const Reviews = Record({
   reviewId: text,
@@ -263,7 +216,7 @@ const Ticket = Record({
   userName: text,
   flightId: text,
   flightClass: text,
-  NumberOfSeats: nat,
+  numberOfSeats: nat,
 });
 
 type Ticket = typeof Ticket.tsType;
@@ -272,7 +225,7 @@ const TicketPayload = Record({
   userName: text,
   flightId: text,
   flightClass: text,
-  NumberOfSeats: nat,
+  numberOfSeats: nat,
 });
 
 type TicketPayload = typeof TicketPayload.tsType;
@@ -412,7 +365,8 @@ export default Canister({
       if (!activityOpt) {
         return Err("Activity not found");
       }
-      const { activityId, NumberOfPeople } = payload;
+      const { activityId, numberOfPeople } = payload;
+      
 
       const activity = activityOpt;
       activity.participants.push(payload.userName);
@@ -431,12 +385,12 @@ export default Canister({
       if (!hotel) {
         return Err("Hotel not found");
       }
-      const { hotelId, NumberOfRooms } = payload;
+      const { hotelId, numberOfRooms } = payload;
 
-      if (hotel.availableRooms < NumberOfRooms) {
+      if (hotel.availableRooms < numberOfRooms) {
         return Err("Not enough rooms available");
       }
-      hotel.availableRooms -= NumberOfRooms;
+      hotel.availableRooms -= numberOfRooms;
       HotelsStorage.insert(hotelId, hotel);
       hotel.guests.push(payload.userName);
 
@@ -453,8 +407,8 @@ export default Canister({
      if (!flightOpt) {
        return Err("Flight not found");
      }
-     const { flightId, NumberOfSeats } = payload;
-     flightOpt.availableSeats -= NumberOfSeats;
+     const { flightId, numberOfSeats } = payload;
+     flightOpt.availableSeats -= numberOfSeats;
      const flight = flightOpt;
      const ticketId = uuidv4();
      const ticket = { ticketId, ...payload };

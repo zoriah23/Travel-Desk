@@ -1,30 +1,4 @@
-# Hirexpert
 
-Hirexpert is a powerful, modern platform designed to streamline the recruitment process. It offers comprehensive features for recruiters to efficiently manage job postings and applications, leveraging the latest technologies to ensure a smooth and effective hiring experience
-
-## Table of Contents
-
-- [Features](#features)
-- [Technology Stack](#technology-stack)
-- [Setup Instructions](#setup-instructions)
-  - [Prerequisites](#prerequisites)
-- [Usage](#usage)
-- [Best link](#Best-link)
-- [Contributing](#contributing)
-
-
-
-
-## Features
-- **Job Posting Management:**: Create, update, and manage job postings with ease. Customize job descriptions, requirements, and other details to attract the best candidates
-
-- **Application Tracking:**: Track and manage applications. View and organize  application statuses.
-
-- **Advanced Search & Filtering**:Quickly find candidates that match specific criteria using powerful search and filtering options.
-
-- **Analytics**: Gain insights into your recruitment efforts with detailed analytics. Track key metrics and make data-driven decisions.
-
-- **User-Friendly Interface**: Designed with a modern, intuitive interface to make it easy for recruiters of all skill levels to navigate and use.
 
 ## Technology Stack
 - **Frontend**: React, React Router, Redux
@@ -96,17 +70,6 @@ Once the job completes, your application will be available at `http://localhost:
 
 ## Best link
 
-- **Users**
-  - `/` : - Homepage and Job post list
-  - `/jobDetail/:id` : - View Job post detail
-  - `/jobDetail/apply/:id` : - Apply to a position 
-
-
-- **Admin**
-  - `/Dashboard` : - Homepage and Job post list
-  - `/CreateJob` : -  Create job post
-  - `/EditJob/:id` : - Edit Job post 
-  - `/Applicants/:id` : - View All applicants to certain position
 
   
 
